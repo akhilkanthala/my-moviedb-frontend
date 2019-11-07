@@ -1,7 +1,6 @@
 // src/App.js
 
 import React from "react";
-import NavBar from "./components/NavBar/NavBar";
 import { useAuth0 } from "./react-auth0-spa/react-auth0-spa";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
