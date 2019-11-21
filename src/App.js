@@ -2,13 +2,12 @@
 
 import React from "react";
 import { useAuth0 } from "./react-auth0-spa/react-auth0-spa";
-import history from "./history";
+import history from "./utils/history";
 import { Route, Router, Switch } from "react-router-dom";
-import Profile from "./components/Profile";
 import Home from "./components/Home";
 import Discover from "./components/Discover";
 import LandingPage from "./components/LandingPage";
-import { ProtectedRoute } from "./ProtectedRoute";
+import { ProtectedRoute } from "./utils/ProtectedRoute";
 import AppBar from "./components/AppBar";
 import MoviePage from "./components/MoviePage";
 import Favourite from "./components/Favourites";

@@ -75,7 +75,7 @@ const Home = props => {
     axios
       .get(`http://localhost:8080/users/${user.email}`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         localStorage.setItem("user", res.data.id);
         console.log(localStorage.getItem("user"));
       })
@@ -93,7 +93,9 @@ const Home = props => {
       .catch(err => {
         console.log(err);
       });
+    
   }, []);
+  
 
   if (state.res == null) {
     return <div></div>;

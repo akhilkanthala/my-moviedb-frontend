@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "../react-auth0-spa/react-auth0-spa";
 import { Grid } from "@material-ui/core";
@@ -13,7 +13,7 @@ import { Rating } from "@material-ui/lab";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import { makeStyles } from "@material-ui/core/styles";
-import history from "../history";
+import history from "../utils/history";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -72,13 +72,18 @@ const Cards = props => {
   const [fav, setFav] = useState(-1);
   const { user } = useAuth0();
   let id = localStorage.getItem("user");
-  props.res !== null &&
-    axios
-      .get(`http://localhost:8080/users/${id}/favourite?mid=${props.res.id}`)
-      .then(res => {
-        res.data === true ? setFav(1) : setFav(-1);
-      })
-      .catch(err => console.log(err));
+  useEffect(() => {
+    props.res !== null &&
+      axios
+        .get(`http://localhost:8080/users/${id}/favourite?mid=${props.res.id}`)
+        .then(res => {
+          res.data === true ? setFav(1) : setFav(-1);
+        })
+        .catch(err =>
+          //  console.log(err)
+          console.log("")
+           );
+  }, [fav]);
   function addFavourite(e) {
     e.stopPropagation();
     props.res !== null && fav === -1
@@ -102,8 +107,6 @@ const Cards = props => {
           )
           .then(res => {
             setFav(-1);
-            // console.log(fav);
-            // console.log(res);
           })
           .catch(err => {
             console.log(err);

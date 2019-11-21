@@ -1,9 +1,9 @@
 import Card from "../components/Card";
 import React from "react";
 import Adapter from "enzyme-adapter-react-16";
-import { shallow, configure, mount } from "enzyme";
+// import {  configure } from "enzyme";
 import { render, waitForElement } from "@testing-library/react";
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
 jest.mock("../react-auth0-spa/react-auth0-spa", () => ({
   useAuth0: jest.fn().mockImplementation(() => ({
     user: {
@@ -11,6 +11,9 @@ jest.mock("../react-auth0-spa/react-auth0-spa", () => ({
     }
   }))
 }));
+const axios = {
+  post: jest.fn(() => Promise.resolve({ data: {} }))
+};
 describe("Card", () => {
   const res = {
     original_title: "Ready Player One",
@@ -30,4 +33,10 @@ describe("Card", () => {
     expect(getByTestId("rating")).toBeDefined();
     expect(getByTestId("overview")).toBeDefined();
   });
+  // it("localhost api",async()=>{
+  //  await axios.post.mockImplementationOnce(()=>
+  //   Promise.resolve().then(res=>console.log(res)).catch(err=>console.log(err))
+    
+  //   )
+  // })
 });
